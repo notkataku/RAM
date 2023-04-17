@@ -10,6 +10,8 @@ public class playerController : MonoBehaviour
     public GameObject prefab1;
     public GameObject prefab2;
     public GameObject prefab3;
+    public GameObject player;
+     public int vita = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,17 @@ public class playerController : MonoBehaviour
     {
         Instantiate(prefab3, transform.position, transform.rotation);
     }
-    }   
+    }  
+     void OnCollisionEnter2D(Collision2D collision)
+    {
+       
+        if (collision.gameObject.tag == "cattivo")
+        { 
+            vita = vita - 1;
+            if(vita==0){
+            Destroy(player);
+        }
+        }
+    } 
  }
 
