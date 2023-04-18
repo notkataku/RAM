@@ -5,13 +5,18 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
      public float speed = 5f;
-    private int scarpe = 0;
+    
      public GameObject prefab;
     public GameObject prefab1;
     public GameObject prefab2;
     public GameObject prefab3;
     public GameObject player;
+    public int danno=2;
      public int vita = 5;
+     public bool scarpe = false;
+     public bool damegUp = false;
+     public bool helt = false;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +26,17 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     if(scarpe!= 0){
-            speed = speed + 2f;
-            scarpe=0;
+     if(scarpe && speed<15){
+            speed = speed + 4f;
+            scarpe=false;
+        }
+         if(helt && vita<10){
+            vita= vita+2;
+            helt=false;
+        }
+         if(damegUp && danno<4){
+            danno= danno + 1;
+            damegUp=false;
         }
         if (Input.GetKey(KeyCode.W))
         {
@@ -42,8 +55,9 @@ public class playerController : MonoBehaviour
             transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
          if (Input.GetKeyDown(KeyCode.LeftArrow))
-    {
+    { 
         Instantiate(prefab, transform.position, transform.rotation);
+           
     }
     if (Input.GetKeyDown(KeyCode.RightArrow))
     {
@@ -57,6 +71,11 @@ public class playerController : MonoBehaviour
     {
         Instantiate(prefab3, transform.position, transform.rotation);
     }
+    
+       
+    
+
+
     }  
      void OnCollisionEnter2D(Collision2D collision)
     {
@@ -68,6 +87,19 @@ public class playerController : MonoBehaviour
             Destroy(player);
         }
         }
+        if (collision.gameObject.tag == "scarpe")
+        { 
+           scarpe=true;
+        }
+         if (collision.gameObject.tag == "helt")
+        { 
+           helt=true;
+        }
+        if (collision.gameObject.tag == "DamegUp")
+        {
+            damegUp = true;
+        }
+
     } 
  }
 
