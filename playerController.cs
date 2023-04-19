@@ -83,7 +83,14 @@ public class playerController : MonoBehaviour
         if (collision.gameObject.tag == "cattivo")
         { 
             vita = vita - 1;
-            if(vita==0){
+            if(vita==0 || vita < 0){
+            Destroy(player);
+        }
+        }
+         if (collision.gameObject.tag == "esplosivo")
+        { 
+            vita = vita - 3;
+            if(vita==0 || vita < 0){
             Destroy(player);
         }
         }
