@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Man_enemy : MonoBehaviour
+public class Robot_enemy : MonoBehaviour
 {
-    public GameObject nemico;
+     public GameObject nemico;
     public playerController otherScript;
     public int vita = 4;
     public int danno = 1;
@@ -20,7 +20,7 @@ public class Man_enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+      
           
 
         transform.position = Vector3.MoveTowards(transform.position, oggettoDaInseguire.position, velocita * Time.deltaTime);
@@ -36,6 +36,13 @@ public class Man_enemy : MonoBehaviour
             Destroy(nemico);
         }
         }
+        
+    
+        if (collision.gameObject.tag == "player")
+        {
+            Destroy(nemico);
+        }
+    
     }
 
 }
